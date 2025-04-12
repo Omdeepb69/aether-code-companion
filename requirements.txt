@@ -1,0 +1,6 @@
+Python 3.x
+ast (built-in Python library)
+watchdog (for file monitoring)
+scikit-learn (for the ML model)
+json (for configuration/rules)
+Maybe a lightweight GUI library like Tkinter or PyQt for optional simple UI feedback

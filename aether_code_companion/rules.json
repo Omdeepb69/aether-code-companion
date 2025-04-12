@@ -1,0 +1,84 @@
+json
+[
+  {
+    "rule_id": "ACC001",
+    "name": "Avoid comparing length to zero",
+    "description": "Checking `len(sequence) == 0` is less idiomatic than checking the truthiness of the sequence directly.",
+    "category": "Style",
+    "severity": "Info",
+    "suggestion": "Use `if not sequence:` instead of `if len(sequence) == 0:`. Use `if sequence:` instead of `if len(sequence) > 0:` or `if len(sequence) != 0:`.",
+    "ast_pattern_description": "Compare node where left is Call(func=Name(id='len'), ...) and right is Constant(value=0) using Eq or NotEq operator. Or Compare node where left is Call(func=Name(id='len'), ...) and right is Constant(value=0) using Gt or Lt operator."
+  },
+  {
+    "rule_id": "ACC002",
+    "name": "Avoid explicit comparison to True",
+    "description": "Comparing a boolean value explicitly to `True` (e.g., `if condition == True:`) is redundant.",
+    "category": "Style",
+    "severity": "Info",
+    "suggestion": "Use `if condition:` instead of `if condition == True:`.",
+    "ast_pattern_description": "Compare node where one operand is Name or Attribute and the other is Constant(value=True) using Eq or Is operator."
+  },
+  {
+    "rule_id": "ACC003",
+    "name": "Avoid explicit comparison to False",
+    "description": "Comparing a boolean value explicitly to `False` (e.g., `if condition == False:`) is less idiomatic than using `not`.",
+    "category": "Style",
+    "severity": "Info",
+    "suggestion": "Use `if not condition:` instead of `if condition == False:`.",
+    "ast_pattern_description": "Compare node where one operand is Name or Attribute and the other is Constant(value=False) using Eq or Is operator."
+  },
+  {
+    "rule_id": "ACC004",
+    "name": "Avoid iterating with range(len(sequence))",
+    "description": "Using `for i in range(len(sequence)): ... sequence[i] ...` is less Pythonic than direct iteration or using `enumerate`.",
+    "category": "Style",
+    "severity": "Warning",
+    "suggestion": "Iterate directly over the sequence (`for item in sequence:`). If you need the index, use `for index, item in enumerate(sequence):`.",
+    "ast_pattern_description": "For loop where the iterator is Call(func=Name(id='range'), args=[Call(func=Name(id='len'), ...)]) and the loop variable is used as an index into the original sequence within the loop body."
+  },
+  {
+    "rule_id": "ACC005",
+    "name": "Avoid bare except clauses",
+    "description": "A bare `except:` clause catches all exceptions, including system-exiting exceptions like `SystemExit` and `KeyboardInterrupt`, making it hard to interrupt the program and potentially hiding other errors.",
+    "category": "ErrorProne",
+    "severity": "Warning",
+    "suggestion": "Specify the exception type(s) you intend to catch, e.g., `except ValueError:`. If you need to catch most errors, consider `except Exception:`.",
+    "ast_pattern_description": "ExceptHandler node with no 'type' attribute specified."
+  },
+  {
+    "rule_id": "ACC006",
+    "name": "Unused variable detected",
+    "description": "A variable was assigned a value but never used.",
+    "category": "Maintainability",
+    "severity": "Info",
+    "suggestion": "Remove the unused variable or use it. Prefix with '_' if intentionally unused.",
+    "ast_pattern_description": "Variable assigned (Assign, AnnAssign, AugAssign) but not referenced later in its scope."
+  },
+  {
+    "rule_id": "ACC007",
+    "name": "Function is too complex",
+    "description": "The function has a high cyclomatic complexity, potentially making it difficult to understand, test, and maintain.",
+    "category": "Complexity",
+    "severity": "Warning",
+    "suggestion": "Consider refactoring the function into smaller, more focused functions.",
+    "ast_pattern_description": "FunctionDef node whose body results in a cyclomatic complexity score above a configured threshold (e.g., > 10)."
+  },
+  {
+    "rule_id": "ACC008",
+    "name": "Use 'is' for None comparison",
+    "description": "Comparing to `None` should be done using identity (`is` or `is not`) rather than equality (`==` or `!=`).",
+    "category": "Style",
+    "severity": "Info",
+    "suggestion": "Use `if variable is None:` or `if variable is not None:`.",
+    "ast_pattern_description": "Compare node where one operand is Name or Attribute and the other is Constant(value=None) using Eq or NotEq operators."
+  },
+  {
+    "rule_id": "ACC009",
+    "name": "Mutable default argument",
+    "description": "Using mutable default arguments (like lists or dictionaries) can lead to unexpected behavior as the default is shared across calls.",
+    "category": "ErrorProne",
+    "severity": "Warning",
+    "suggestion": "Use `None` as the default and initialize the mutable type inside the function body. E.g., `def func(arg=None):\n    if arg is None:\n        arg = []`",
+    "ast_pattern_description": "FunctionDef node where arguments.defaults contains a List, Dict, or Set literal."
+  }
+]
