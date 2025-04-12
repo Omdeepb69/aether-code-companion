@@ -1,4 +1,3 @@
-Okay, buckle up, buttercup! Let's get this README looking sharper than Tony Stark's goatee. Here's the professional, yet totally not boring, rundown for Aether Code Companion.
 
 ***
 
@@ -63,5 +62,3 @@ Where does all the magic happen? Pretty standard stuff:
 Licensed under the MIT License. Basically, do cool stuff with it, just give credit where it's due. 👍
 
 ***
-
-Go build something awesome! ✨
